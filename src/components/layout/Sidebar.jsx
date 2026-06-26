@@ -5,6 +5,8 @@ import {
   Map,
   X,
   Upload,
+  Users,
+  BookOpen,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -84,6 +86,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       name: "Riwayat Rekomendasi",
       path: "/admin/history",
       icon: History,
+    },
+    {
+      name: "Manajemen User",
+      path: "/admin/users",
+      icon: Users,
+    },
+    {
+      name: "Manajemen Mata Kuliah",
+      path: "/admin/courses",
+      icon: BookOpen,
     },
   ];
 
@@ -171,7 +183,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 key={item.path}
                 to={item.path}
                 onClick={() => setSidebarOpen(false)}
-                className={({ isActive }) =>  
+                className={({ isActive }) =>
                   `
               flex items-center gap-3
               px-4 py-3

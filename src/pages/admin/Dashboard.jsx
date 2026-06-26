@@ -31,7 +31,7 @@ const actions = [
     title: "Lihat Riwayat",
     desc: "Pantau aktivitas rekomendasi mahasiswa.",
     icon: History,
-    path: "/history",
+    path: "/admin/history",
   },
 ];
 

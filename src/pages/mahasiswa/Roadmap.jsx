@@ -12,14 +12,13 @@ const Roadmap = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const response = await getRoadmap();
 
-        setTimeout(() => {
-          setRoadmapData(response.data);
-          setLoading(false);
-        }, 2000);
+        setRoadmapData(response.data);
       } catch (error) {
         console.error(error);
+      } finally {
         setLoading(false);
       }
     };
@@ -28,7 +27,40 @@ const Roadmap = () => {
   }, []);
 
   return (
-    <div>
+    <div className="relative">
+      <div
+        className="
+        absolute
+        top-0
+        left-1/2
+        -translate-x-1/2
+
+        w-64 h-64
+        md:w-[500px] md:h-[500px]
+
+        bg-indigo-300/20
+        blur-3xl
+        rounded-full
+
+        pointer-events-none
+      "
+      />
+
+      <div
+        className="
+        absolute
+        top-32 right-0
+
+        w-40 h-40
+        md:w-[300px] md:h-[300px]
+
+        bg-violet-300/10
+        blur-3xl
+        rounded-full
+
+        pointer-events-none
+      "
+      />
       {/* HEADER */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-900">
@@ -50,8 +82,6 @@ const Roadmap = () => {
               className="
           bg-white/90
           backdrop-blur-sm
-
-          border border-slate-200
 
           rounded-[2rem]
           p-6
@@ -91,7 +121,8 @@ const Roadmap = () => {
             </h3>
 
             <p className="text-slate-500 mt-3 max-w-xl mx-auto leading-7">
-              Roadmap mata kuliah belum tersedia. Silakan hubungi administrator untuk informasi lebih lanjut.
+              Roadmap mata kuliah belum tersedia. Silakan hubungi administrator
+              untuk informasi lebih lanjut.
             </p>
           </div>
         ) : (
@@ -176,10 +207,16 @@ const Roadmap = () => {
                         border-red-100
                         hover:shadow-red-100
                       `
-                      : `
-                        bg-gradient-to-br from-slate-50 to-white
-                        border-slate-200
-                      `
+                      : course.peminatan === "Pilihan"
+                        ? `
+                          bg-gradient-to-br from-green-50 to-white
+                          border-green-100
+                        `
+                        : `
+                          bg-gradient-to-br from-slate-50 to-white
+                          border-slate-200
+                          hover:shadow-slate-100
+                         `
                 }
               `}
                   >
@@ -193,7 +230,9 @@ const Roadmap = () => {
                       ? "bg-indigo-500"
                       : course.peminatan === "Cyber Security"
                         ? "bg-red-500"
-                        : "bg-slate-300"
+                        : course.peminatan === "Pilihan"
+                          ? "bg-green-500"
+                          : "bg-slate-300"
                   }
                 `}
                     />
@@ -267,7 +306,9 @@ const Roadmap = () => {
                               ? "bg-indigo-100 text-indigo-700"
                               : course.peminatan === "Cyber Security"
                                 ? "bg-red-100 text-red-700"
-                                : "bg-slate-100 text-slate-600"
+                                : course.peminatan === "Pilihan"
+                                  ? "bg-green-100 text-green-700"
+                                  : "bg-slate-100 text-slate-600"
                           }
                         `}
                       >
@@ -275,7 +316,9 @@ const Roadmap = () => {
                           ? "AI"
                           : course.peminatan === "Cyber Security"
                             ? "Cyber"
-                            : "Umum"}
+                            : course.peminatan === "Pilihan"
+                              ? "Pilihan"
+                              : "Umum"}
                       </span>
                     </div>
 
@@ -348,7 +391,9 @@ const Roadmap = () => {
               ? "bg-indigo-500"
               : selectedCourse.peminatan === "Cyber Security"
                 ? "bg-red-500"
-                : "bg-slate-300"
+                : selectedCourse.peminatan === "Pilihan"
+                  ? "bg-green-500"
+                  : "bg-slate-300"
           }
         `}
             />
@@ -415,7 +460,9 @@ const Roadmap = () => {
                     ? "bg-indigo-100 text-indigo-700"
                     : selectedCourse.peminatan === "Cyber Security"
                       ? "bg-red-100 text-red-700"
-                      : "bg-slate-100 text-slate-700"
+                      : selectedCourse.peminatan === "Pilihan"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-slate-100 text-slate-700"
                 }
               `}
                   >
@@ -423,7 +470,9 @@ const Roadmap = () => {
                       ? "Artificial Intelligence"
                       : selectedCourse.peminatan === "Cyber Security"
                         ? "Cyber Security"
-                        : "Umum"}
+                        : selectedCourse.peminatan === "Pilihan"
+                          ? "Pilihan"
+                          : "Umum"}
                   </span>
                 </div>
 
@@ -476,11 +525,17 @@ const Roadmap = () => {
                   ? "bg-indigo-50 border-indigo-100"
                   : selectedCourse.peminatan === "Cyber Security"
                     ? "bg-red-50 border-red-100"
-                    : "bg-slate-50 border-slate-200"
+                    : selectedCourse.peminatan === "Pilihan"
+                      ? "bg-green-50 border-green-100"
+                      : "bg-slate-50 border-slate-200"
               }
             `}
                 >
-                  <p className="text-xs text-slate-500 mb-2">Peminatan</p>
+                  <p className="text-xs text-slate-500 mb-2">
+                    {selectedCourse.peminatan === "Pilihan"
+                      ? "Mata Kuliah"
+                      : "Peminatan"}
+                  </p>
 
                   <h3 className="text-lg font-bold text-slate-800 break-words">
                     {selectedCourse.peminatan}

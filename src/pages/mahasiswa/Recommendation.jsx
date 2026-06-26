@@ -32,10 +32,13 @@ const Recommendation = () => {
       {/* BACKGROUND GLOW */}
       <div
         className="
-        absolute top-0 left-1/2
+        absolute
+        top-0
+        left-1/2
         -translate-x-1/2
 
-        w-[500px] h-[500px]
+        w-64 h-64
+        md:w-[500px] md:h-[500px]
 
         bg-indigo-300/20
         blur-3xl
@@ -47,9 +50,11 @@ const Recommendation = () => {
 
       <div
         className="
-        absolute top-40 right-0
+        absolute
+        top-32 right-0
 
-        w-[300px] h-[300px]
+        w-40 h-40
+        md:w-[300px] md:h-[300px]
 
         bg-violet-300/10
         blur-3xl
@@ -74,124 +79,121 @@ const Recommendation = () => {
           </p>
         </div>
 
-        {/* INPUT */}
+        {/* SIRA ASSISTANT */}
         <div
           className="
-          bg-white/80
-          backdrop-blur-sm
-          border border-slate-200
-          rounded-[32px]
-          p-4 md:p-5
-          shadow-sm
-        "
+    bg-white
+    border border-slate-200
+    rounded-3xl
+    p-5
+    shadow-sm
+  "
         >
-          {/* TOP */}
+          {/* HEADER */}
           <div className="flex items-center gap-3 mb-4">
             <div
               className="
-              w-10 h-10
-              rounded-2xl
-              bg-gradient-to-br
-              from-indigo-500
-              to-violet-500
+        w-12 h-12
+        rounded-2xl
 
-              flex items-center justify-center
-              text-white
-            "
+        bg-gradient-to-br
+        from-indigo-500
+        to-violet-500
+
+        flex items-center justify-center
+
+        text-white
+        shrink-0
+      "
             >
-              <Sparkles size={18} />
+              <Sparkles size={22} />
             </div>
 
             <div>
-              <h2 className="font-semibold text-slate-800">
-                Asisten Rekomendasi AI
+              <h2 className="font-semibold text-slate-800 text-lg">
+                Asisten SIRA
               </h2>
 
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-slate-500 mt-1">
                 Masukkan minat atau bidang yang ingin dipelajari.
               </p>
             </div>
           </div>
 
-          {/* INPUT AREA */}
+          {/* INPUT */}
           <div
             className="
-            flex items-center gap-3
+      flex items-center gap-3
 
-            border border-slate-200
-            rounded-2xl
+      border border-slate-200
+      rounded-2xl
 
-            px-4 py-3
+      bg-slate-50
 
-            bg-white/70
+      px-4 py-2
 
-            focus-within:ring-2
-            focus-within:ring-indigo-500
+      focus-within:ring-2
+      focus-within:ring-indigo-500
 
-            transition-all
-          "
+      transition-all
+    "
           >
             <input
               type="text"
               value={query}
               disabled={loading}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Contoh: Saya tertarik pada keamanan data dan jaringan komputer..."
+              placeholder="Contoh: Saya tertarik pada keamanan data..."
               className="
-              flex-1
-              bg-transparent
-              outline-none
+        flex-1
+        min-w-0
 
-              text-slate-700
-              placeholder:text-slate-400
-            "
+        bg-transparent
+        outline-none
+
+        text-slate-700
+        placeholder:text-slate-400
+      "
             />
 
             <button
               onClick={handleGenerate}
               disabled={loading}
               className="
-              w-11 h-11
-              rounded-xl
+        shrink-0
 
-              bg-gradient-to-r
-              from-indigo-600
-              to-violet-600
+        w-11 h-11
+        rounded-2xl
 
-              hover:opacity-90
-              hover:scale-105
+        bg-gradient-to-r
+        from-indigo-600
+        to-violet-600
 
-              disabled:opacity-60
+        text-white
 
-              flex items-center justify-center
+        flex items-center justify-center
 
-              text-white
-              transition-all
-            "
+        hover:scale-105
+        disabled:opacity-60
+
+        transition-all
+      "
             >
               {loading ? (
                 <div
                   className="
-                  w-5 h-5
-                  border-2 border-white/30
-                  border-t-white
-                  rounded-full
-                  animate-spin
-                "
+            w-5 h-5
+            border-2 border-white/30
+            border-t-white
+            rounded-full
+            animate-spin
+          "
                 />
               ) : (
                 <ArrowUp size={18} />
               )}
             </button>
           </div>
-
-          {/* LOADING */}
-          {loading && (
-            <div className="mt-4 flex items-center gap-2 text-sm text-slate-500">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
-              AI sedang menghasilkan rekomendasi mata kuliah...
-            </div>
-          )}
         </div>
 
         {/* RESULT SECTION */}
@@ -352,7 +354,6 @@ const Recommendation = () => {
                         className="
                         text-slate-600
                         leading-7
-                        line-clamp-4
                       "
                       >
                         {item.alasan}.

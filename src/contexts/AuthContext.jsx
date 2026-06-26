@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -10,18 +11,28 @@ export const AuthProvider = ({ children }) => {
     const userData = localStorage.getItem("user");
 
     if (token && userData) {
-      setUser({
-        token,
-        ...JSON.parse(userData),
-      });
+      try {
+        const decoded = jwtDecode(token);
+
+        if (decoded.exp * 1000 < Date.now()) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          return;
+        }
+
+        setUser({
+          token,
+          ...JSON.parse(userData),
+        });
+      } catch (error) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      }
     }
   }, []);
 
-  // LOGIN
   const login = (data) => {
     localStorage.setItem("token", data.token);
-
-    // simpan user object
     localStorage.setItem("user", JSON.stringify(data.user));
 
     setUser({
@@ -30,9 +41,9 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  // LOGOUT
   const logout = () => {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
   };
 

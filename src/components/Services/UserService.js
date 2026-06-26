@@ -5,3 +5,12 @@ export const getUsers = async () => {
 
   return response.data;
 };
+
+export const getUsersManagement = async (page = 1, search = "") => {
+  const response = await axiosInstance.get(
+    `/users-management?page=${page}&search=${search}`,
+  );
+
+  return response.data;
+  log(response.data);
+};

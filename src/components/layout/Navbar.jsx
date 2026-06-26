@@ -22,6 +22,8 @@ const Navbar = ({ setSidebarOpen }) => {
     "/admin/roadmap": "Roadmap Mata Kuliah",
     "/admin/upload-silabus": "Upload Silabus",
     "/admin/history": "Riwayat Rekomendasi",
+    "/admin/users": "Manajemen Pengguna",
+    "/admin/courses": "Manajemen Mata Kuliah",
   };
 
   const currentTitle = titles[location.pathname] || "Dashboard";

@@ -21,6 +21,8 @@ import AdminRoute from "./AdminRoute";
 import ScrollToTop from "../components/ScrollToTop";
 import LandingPage from "../pages/LandingPage";
 import MahasiswaRoute from "./MahasiswaRoute";
+import UserManagement from "../pages/admin/UserManagement";
+import CourseManagement from "../pages/admin/CourseManagement";
 
 const AppRoutes = () => {
   return (
@@ -127,6 +129,26 @@ const AppRoutes = () => {
               <ProtectedRoute>
                 <AdminRoute>
                   <History />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <UserManagement />
+                </AdminRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/courses"
+            element={
+              <ProtectedRoute>
+                <AdminRoute>
+                  <CourseManagement />
                 </AdminRoute>
               </ProtectedRoute>
             }

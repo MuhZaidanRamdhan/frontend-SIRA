@@ -4,7 +4,20 @@ import { getLogs } from "../../components/Services/logService";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const roadmapPreview = ["Machine Learning", "Keamanan Web", "Data Mining"];
+const roadmapPreview = [
+  {
+    title: "Fondasi Akademik",
+    desc: "Membangun dasar keilmuan melalui mata kuliah wajib semester awal.",
+  },
+  {
+    title: "Eksplorasi Peminatan",
+    desc: "Menentukan jalur minat melalui mata kuliah pilihan AI atau Cyber Security.",
+  },
+  {
+    title: "Implementasi dan Proyek",
+    desc: "Mengaplikasikan kompetensi melalui program merdeka belajar dan tugas akhir.",
+  },
+];
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -311,7 +324,7 @@ const Dashboard = () => {
 
               {/* RESULT */}
               <div className="space-y-4 mt-6">
-                {parsedResult.recommendations.slice(0, 3).map((item, index) => (
+                {parsedResult.recommendations.slice(0, 4).map((item, index) => (
                   <div
                     key={index}
                     className="
@@ -409,25 +422,23 @@ const Dashboard = () => {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-                Roadmap Akademik
+                Jalur Pembelajaran
               </h2>
 
               <p className="text-sm md:text-base text-slate-500 mt-2 leading-7">
-                Roadmap mata kuliah semester 1 hingga semester 4.
+                Panduan eksplorasi mata kuliah akademik secara bertahap.
               </p>
             </div>
 
             <div
               className="
-                hidden sm:flex
-
                 w-14 h-14
                 rounded-2xl
 
-                bg-violet-100
-                text-violet-600
+                bg-indigo-100
+                text-indigo-600
 
-                items-center justify-center
+                flex items-center justify-center
               "
             >
               <BookOpen size={24} />
@@ -479,20 +490,11 @@ const Dashboard = () => {
               "
               >
                 <div className="min-w-0">
-                  <h3
-                    className="
-                    font-semibold
-                    text-slate-800
-
-                    break-words
-                  "
-                  >
-                    {item}
+                  <h3 className="font-semibold text-slate-800 break-words">
+                    {item.title}
                   </h3>
 
-                  <p className="text-sm text-slate-500 mt-1">
-                    Mata kuliah roadmap akademik
-                  </p>
+                  <p className="text-sm text-slate-500 mt-1">{item.desc}</p>
                 </div>
 
                 <ArrowRight size={18} className="text-slate-400 shrink-0" />
@@ -519,7 +521,7 @@ const Dashboard = () => {
             transition-all
           "
           >
-            Lihat Roadmap Akademik
+            Telusuri Roadmap
           </button>
         </div>
       </div>
